@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Landing from "./pages/Landing";
 import { Route } from "react-router-dom";
+import "./App.css";
 
 
 function App() {
