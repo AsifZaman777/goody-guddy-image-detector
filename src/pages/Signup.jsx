@@ -10,7 +10,7 @@ const Signup = () => {
                 <h1 className="text-4xl inset-10 absolute text-cyan-800 font-medium">Register to join!</h1>
                
             </div>
-            <div className="flex absolute inset-20 card shrink-0 w-full max-w-sm shadow-2xl bg-transparent bg-slate-500 backdrop backdrop-blur-md bg-opacity-30">
+            <div className="flex absolute inset-20 card shrink-0 w-full max-w-sm shadow-2xl bg-transparent bg-slate-700 backdrop backdrop-blur-sm bg-opacity-30">
 
                 <form className="card-body">
                     <div className="form-control">
@@ -38,12 +38,7 @@ const Signup = () => {
                         </label>
                         <input type="text" placeholder="017XXXXXXXX" className="input input-bordered" required />
                     </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text font-light text-white">NID</span>
-                        </label>
-                        <input type="text" placeholder="NID" className="input input-bordered" required />
-                    </div>
+                    
                     <div className="form-control mt-20">
                         <button className="btn btn-success">Register for Goody-Guddy</button>
                         

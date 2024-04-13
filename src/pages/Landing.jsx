@@ -16,7 +16,7 @@ const Landing = () => {
                                 <li>Integrated machine learning model can assist to detect faces</li>
                             </ul>
                             <br/>
-                            <Link to="/home">
+                            <Link to="/login">
                             <button className="btn btn-primary">Get Started</button>
                             </Link>
                         </div>
