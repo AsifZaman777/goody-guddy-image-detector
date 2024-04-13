@@ -12,6 +12,6 @@ export default {
   plugins: [daisyui],
 
   daisyui: {
-    themes: ["cupcake"],
+    themes: ["garden","halloween"],
   },
 }

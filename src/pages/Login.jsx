@@ -8,15 +8,15 @@ const Login = () => {
  
 
     const loginlogic = (e) => {
-        e.preventDefault(); // Prevent form submission
-
-        // Perform validation (e.g., checking if email and password are not empty)
+        e.preventDefault(); //prevent submission
+ 
+        //value check
         if (email.trim() === '' || password.trim() === '') {
             alert('Please enter both email and password.');
             return;
         }
 
-       window.location.href = '/home'; 
+       window.location.href = '/dashboard'; 
     };
 
     return (

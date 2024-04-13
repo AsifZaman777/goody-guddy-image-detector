@@ -1,11 +1,13 @@
-import React from 'react';
+
 
 const UploadForm = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div>
+      <form>
+      <input type="file" className="file-input w-full max-w-xs" />
+      </form>
+    </div>
+  );
 };
 
 export default UploadForm;
