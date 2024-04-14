@@ -1,27 +1,64 @@
-import { useState } from 'react';
-import {  Link } from 'react-router-dom';
-import goodyLogin from '../assets/goody-login.jpeg';
+import { useEffect, useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from './config'; // Assuming you have imported 'auth' from your firebase configuration
+
+import goody1 from '../assets/goody-signup.jpeg';
+import goody2 from '../assets/goody.jpeg';
+import goody3 from '../assets/goody-signup.jpeg';
+import goody4 from '../assets/goody.jpeg';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
- 
+    const [error, setError] = useState('');
+    const [currentImage, setCurrentImage] = useState(0);
+    const images = [
+        goody1,
+        goody2,
+        goody3,
+        goody4
+    ];
 
-    const loginlogic = (e) => {
-        e.preventDefault(); //prevent submission
- 
-        //value check
-        if (email.trim() === '' || password.trim() === '') {
-            alert('Please enter both email and password.');
-            return;
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+        }, 5000); // Change image every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [images.length]);
+
+    const loginLogic = () => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log('User logged in:', user);
+                localStorage.setItem('email', user.email);
+                window.location.href = '/dashboard';
+            })
+            .catch((error) => {
+                setError(error.message);
+                console.error('Error signing in:', error);
+            });
+    };
+
+    useEffect(() => {
+        const storedEmail = localStorage.getItem('email');
+        if (storedEmail) {
+            setEmail(storedEmail);
         }
+    }, []);
 
-       window.location.href = '/dashboard'; 
+    const heroStyle = {
+        minHeight: '100vh',
+        position: 'relative',
+        overflow: 'hidden',
+        transition: 'background-image 0.5s ease-in-out',
+        backgroundImage: `url(${images[currentImage]})`
     };
 
     return (
         <div>
-            <div className="hero min-h-screen" style={{backgroundImage: `url(${goodyLogin})`}}>
+            <div className="hero" style={heroStyle}>
                 <div className="hero-overlay bg-opacity-70"></div>
                 <div className="hero-content flex-col lg:flex-col">
                     <div className="text-center">
@@ -42,11 +79,9 @@ const Login = () => {
                                 </label>
                                 <input type="password" placeholder="password" className="input input-bordered" required value={password} onChange={(e) => setPassword(e.target.value)} />
                             </div>
+                            {error && <div className="text-red-600">{error}</div>}
                             <div className="form-control mt-6">
-                                <button onClick={loginlogic} className="btn btn-success">Login</button>
-                                <Link to="/signup">
-                                    <button className="btn btn-secondary ml-10 my-3 max-w-lg">Not a member of Goody Guddy?</button>
-                                </Link>
+                                <button type="button" onClick={loginLogic} className="btn btn-success">Login</button>
                             </div>
                         </form>
                     </div>
