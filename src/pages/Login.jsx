@@ -22,7 +22,7 @@ const Login = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImage((prevImage) => (prevImage + 1) % images.length);
-        }, 5000); // Change image every 5 seconds
+        }, 5000);
 
         return () => clearInterval(interval);
     }, [images.length]);
@@ -65,7 +65,7 @@ const Login = () => {
                         <h1 className="text-5xl text-cyan-100 font-bold">Login Panel</h1>
                         <p className="py-6 max-w-lg text-cyan-100 font-light mb-6">Only Goody Guddy members can join the repository. If you are a member of Goody Guddy, please login. Otherwise, contact with <a className="font-bold text-blue-300" href="mailto:asifzaman3123@gmail.com">asifzaman3123@gmail.com</a></p>
                     </div>
-                    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-transparent bg-slate-500 backdrop backdrop-blur-md bg-opacity-30">
+                    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-transparent bg-slate-800 backdrop backdrop-blur-sm bg-opacity-30">
                         <form className="card-body">
                             <div className="form-control">
                                 <label className="label">
