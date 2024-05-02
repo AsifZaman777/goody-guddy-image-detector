@@ -33,21 +33,31 @@ const Login = () => {
                 const user = userCredential.user;
                 console.log('User logged in:', user);
                 localStorage.setItem('email', user.email);
-                window.location.href = '/dashboard';
-
+               // read url path 
+               const url = window.location.href;
+                
+               if(url.includes('dashboard') && localStorage.getItem('email')==null){ 
+                   location.reload();
+               }
+               else
+               {
+                   window.location.href = '/dashboard';
+               }
             })
             .catch((error) => {
                 setError(error.message);
                 console.error('Error signing in:', error);
             });
     };
+    
+    
 
-    useEffect(() => {
-        const storedEmail = localStorage.getItem('email');
-        if (storedEmail) {
-            setEmail(storedEmail);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const storedEmail = localStorage.getItem('email');
+    //     if (storedEmail) {
+    //         setEmail(storedEmail);
+    //     }
+    // }, []);
 
     const heroStyle = {
         minHeight: '100vh',
@@ -56,6 +66,10 @@ const Login = () => {
         transition: 'background-image 0.5s ease-in-out',
         backgroundImage: `url(${images[currentImage]})`
     };
+
+ //stop navigate to dashboard if localstorage has no email
+
+
 
     return (
         <div>

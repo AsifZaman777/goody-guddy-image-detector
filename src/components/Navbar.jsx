@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
 
+const logoutHandler = () => {
+  localStorage.removeItem('email');
+  localStorage.removeItem('token');
+  window.location.href = '/login';
+};
+
 const Navbar = () => {
   return (
     <div className="bg-base-100 shadow-md">
@@ -39,32 +45,24 @@ const Navbar = () => {
         </label>
 
         
-        <div className="flex items-center">
-          <div className=" text-md hover:text-blue-500 transition-colors">{localStorage.getItem('email')}</div>
-        </div>
-      
-
         <div className="dropdown dropdown-end">
-          {/* <div
+          <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle avatar hover:bg-opacity-20"
+            className="m-1 btn btn-ghost btn-sm dropdown-toggle transition-colors ring ring-blue-500 ring-opacity-50"
           >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              />
-            </div>
-          </div> */}
+           <div className="flex items-center">
+          <div className=" text-md transition-colors">{localStorage.getItem('email')}</div>
+        </div>
+          </div>
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <Link to="/login" className="btn btn-error text-white">
-                Logout
-              </Link>
+            <li className="btn btn-error text-white">
+               
+              <Link to="/login" className="text-white" onClick={logoutHandler} >Logout</Link>
+
             </li>
           </ul>
         </div>
