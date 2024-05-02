@@ -22,7 +22,7 @@ const Login = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImage((prevImage) => (prevImage + 1) % images.length);
-        }, 5000);
+        }, 3000);
 
         return () => clearInterval(interval);
     }, [images.length]);
@@ -34,6 +34,7 @@ const Login = () => {
                 console.log('User logged in:', user);
                 localStorage.setItem('email', user.email);
                 window.location.href = '/dashboard';
+
             })
             .catch((error) => {
                 setError(error.message);

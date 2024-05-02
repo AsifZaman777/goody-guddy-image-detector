@@ -11,6 +11,7 @@ const Navbar = () => {
           >
             GG Image Repository
           </Link>
+          
         </div>
 
         <label className="swap swap-rotate ">
@@ -37,8 +38,14 @@ const Navbar = () => {
           </svg>
         </label>
 
+        
+        <div className="flex items-center">
+          <div className=" text-md hover:text-blue-500 transition-colors">{localStorage.getItem('email')}</div>
+        </div>
+      
+
         <div className="dropdown dropdown-end">
-          <div
+          {/* <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle avatar hover:bg-opacity-20"
@@ -49,7 +56,7 @@ const Navbar = () => {
                 src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
               />
             </div>
-          </div>
+          </div> */}
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
