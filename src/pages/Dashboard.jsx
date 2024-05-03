@@ -2,6 +2,14 @@ import Navbar from '../components/Navbar';
 import UploadForm from '../components/UploadForm';
 import ImageGallery from '../components/ImageGallery';
 
+//url login prevent
+const checkUser = () => {
+    const email = localStorage.getItem('email');
+    if (window.location.pathname === '/dashboard' && !email) {
+        window.location.href = '/login';
+    }
+}
+checkUser();
 
 const Dashboard = () => {
 

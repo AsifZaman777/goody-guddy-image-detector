@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './config'; // Assuming you have imported 'auth' from your firebase configuration
 
+
+
 import goody1 from '../assets/goody-signup.jpeg';
 import goody2 from '../assets/goody.jpeg';
 import goody3 from '../assets/goody-signup.jpeg';
@@ -26,29 +28,31 @@ const Login = () => {
 
         return () => clearInterval(interval);
     }, [images.length]);
+    
+    //can't go back from login page
+    function backRoutePrevent() {
+        history.pushState(null, null, location.href);
+        window.onpopstate = function() {
+          history.go(1);
+        }   
+    }
+    backRoutePrevent();
+  
 
     const loginLogic = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log('User logged in:', user);
-                localStorage.setItem('email', user.email);
-               // read url path 
-               const url = window.location.href;
-                
-               if(url.includes('dashboard') && localStorage.getItem('email')==null){ 
-                   location.reload();
-               }
-               else
-               {
-                   window.location.href = '/dashboard';
-               }
+                localStorage.setItem('email', email);
+                window.location.href = '/dashboard';
             })
             .catch((error) => {
                 setError(error.message);
                 console.error('Error signing in:', error);
             });
     };
+
     
     
 
