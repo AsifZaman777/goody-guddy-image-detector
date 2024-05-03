@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+
 
   const logoutHandler = () => {
     localStorage.removeItem('email');
