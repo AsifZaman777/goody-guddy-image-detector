@@ -54,14 +54,6 @@ const Login = () => {
     };
 
     
-    
-
-    // useEffect(() => {
-    //     const storedEmail = localStorage.getItem('email');
-    //     if (storedEmail) {
-    //         setEmail(storedEmail);
-    //     }
-    // }, []);
 
     const heroStyle = {
         minHeight: '100vh',
