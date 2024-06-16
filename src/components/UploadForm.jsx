@@ -12,6 +12,8 @@ const UploadForm = () => {
     }
   }
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -24,7 +26,7 @@ const UploadForm = () => {
   //useEffect to print the url once the image is uploaded
   useEffect(() => {
     if (url) {
-      console.log(url);
+    //reset the form
     }
   } , [url]);
 
