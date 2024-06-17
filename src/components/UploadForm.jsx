@@ -1,5 +1,5 @@
 // src/components/UploadForm.js
-import { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStorage from '../hooks/useStorage';
 
 const UploadForm = () => {
@@ -12,23 +12,27 @@ const UploadForm = () => {
     }
   }
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (selectedFile) {
       startUpload(selectedFile);
-      setSelectedFile(null);
+      setSelectedFile(null); // Clear selected file after upload starts
     }
   }
 
-  //useEffect to print the url once the image is uploaded
+  const progressLogic = () => {
+    if (progress > 0 && progress < 100) {
+      return <progress className="progress w-56" value={progress} max="100" />;
+    }
+  }
+
   useEffect(() => {
     if (url) {
-    //reset the form
+      console.log('Uploaded image URL:', url);
+      setSelectedFile(null); // Reset the selected file state
     }
-  } , [url]);
+  }, [url]);
 
   return (
     <div>
@@ -39,16 +43,12 @@ const UploadForm = () => {
           onChange={handleFileChange}
           className="file-input file-input-bordered w-full max-w-xs"
         />
-        <button className="btn btn-neutral font-normal mt-5 mx-5">Upload</button>
+        <button type="submit" className="btn btn-neutral font-normal mt-5 mx-5">Upload</button>
       </form>
 
-      {progress > 0 && (
-        <div>Progress: {progress}%</div>
-      )}
-      {error && (
-        <div>Error: {error}</div>
-      )}
-  
+      {progress > 0 && progressLogic()}
+
+      {error && <div>Error: {error}</div>}
     </div>
   );
 };
