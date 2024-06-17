@@ -3,6 +3,8 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDWKoNjJhdrnScwjjoPN3or6RXUVDHPdlI",
   authDomain: "gg-image-detection.firebaseapp.com",
