@@ -1,7 +1,7 @@
 import useFirestore from '../hooks/useFireStore.js';
 
 const ImageGallery = () => {
-    const photos = useFirestore();
+    const { photos, loading } = useFirestore();
 
     const downloadLogic = (imageUrl, imageName) => {
         const link = document.createElement('a');
@@ -11,6 +11,10 @@ const ImageGallery = () => {
         link.click();
         document.body.removeChild(link);
     };
+
+    if (loading) {
+        return <div className="text-center mt-10">Loading...</div>;
+    }
 
     return (
         <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 lg:gap-8 justify-center mt-10 px-4 lg:px-8 xl:px-10">
