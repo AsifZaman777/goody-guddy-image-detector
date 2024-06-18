@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './config'; // Assuming you have imported 'auth' from your firebase configuration
-
-
+import { auth } from '../pages/config.js'; // Assuming you have imported 'auth' from your firebase configuration
 
 import goody1 from '../assets/goody-signup.jpeg';
 import goody2 from '../assets/goody.jpeg';
@@ -21,6 +20,8 @@ const Login = () => {
         goody4
     ];
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImage((prevImage) => (prevImage + 1) % images.length);
@@ -28,16 +29,13 @@ const Login = () => {
 
         return () => clearInterval(interval);
     }, [images.length]);
-    
-    //can't go back from login page
-    function backRoutePrevent() {
-        history.pushState(null, null, location.href);
+
+    useEffect(() => {
+        window.history.pushState(null, null, location.href);
         window.onpopstate = function() {
-          history.go(1);
-        }   
-    }
-    backRoutePrevent();
-  
+            window.history.go(1);
+        }
+    }, []);
 
     const loginLogic = () => {
         signInWithEmailAndPassword(auth, email, password)
@@ -45,15 +43,13 @@ const Login = () => {
                 const user = userCredential.user;
                 console.log('User logged in:', user);
                 localStorage.setItem('email', email);
-                window.location.href = '/dashboard';
+                navigate('/dashboard');
             })
             .catch((error) => {
                 setError(error.message);
                 console.error('Error signing in:', error);
             });
     };
-
-    
 
     const heroStyle = {
         minHeight: '100vh',
@@ -62,10 +58,6 @@ const Login = () => {
         transition: 'background-image 0.5s ease-in-out',
         backgroundImage: `url(${images[currentImage]})`
     };
-
- //stop navigate to dashboard if localstorage has no email
-
-
 
     return (
         <div>
