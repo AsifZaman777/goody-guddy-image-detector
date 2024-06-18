@@ -12,17 +12,16 @@ const checkUser = () => {
 checkUser();
 
 const Dashboard = () => {
-
     return (
-        <div className='max-w-6xl mx-auto my-5'>
-        <Navbar />
-        <div className="text-center my-10">
-            <UploadForm />
+        <div className='mx-auto my-5'>
+            <Navbar />
+            <div className="text-center my-10">
+                <UploadForm />
+            </div>
+            <div className="text-left my-20 overflow-y-auto max-h-screen">
+                <ImageGallery />
+            </div>
         </div>
-        <div className="text-left my-20">
-            <ImageGallery />
-        </div>
-    </div>
     );
 };
 

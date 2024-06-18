@@ -1,4 +1,3 @@
-// components/ImageGallery.js
 import useFirestore from '../hooks/useFireStore.js';
 
 const ImageGallery = () => {
@@ -14,9 +13,9 @@ const ImageGallery = () => {
     };
 
     return (
-        <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-6 md:gap-10 justify-center mt-10 px-4 md:px-0">
+        <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 lg:gap-8 justify-center mt-10 px-4 lg:px-8 xl:px-10">
             {photos.map((photo, index) => (
-                <div key={index} className="card w-full md:w-96 glass">
+                <div key={index} className="card w-full glass">
                     <figure>
                         <img
                             src={photo.imageUrl}
