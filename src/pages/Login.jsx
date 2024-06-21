@@ -13,12 +13,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [currentImage, setCurrentImage] = useState(0);
-    const images = [
-        goody1,
-        goody2,
-        goody3,
-        goody4
-    ];
+    const images = [goody1, goody2, goody3, goody4];
 
     const navigate = useNavigate();
 
@@ -30,14 +25,16 @@ const Login = () => {
         return () => clearInterval(interval);
     }, [images.length]);
 
+    // Prevent user from going back to the login page after logging in
     useEffect(() => {
         window.history.pushState(null, null, location.href);
-        window.onpopstate = function() {
+        window.onpopstate = function () {
             window.history.go(1);
-        }
+        };
     }, []);
 
-    const loginLogic = () => {
+    const loginLogic = (event) => {
+        event.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -66,10 +63,12 @@ const Login = () => {
                 <div className="hero-content flex-col lg:flex-col">
                     <div className="text-center">
                         <h1 className="text-5xl text-cyan-100 font-bold">Login Panel</h1>
-                        <p className="py-6 max-w-lg text-cyan-100 font-light mb-6">Only Goody Guddy members can join the repository. If you are a member of Goody Guddy, please login. Otherwise, contact with <a className="font-bold text-blue-300" href="mailto:asifzaman3123@gmail.com">asifzaman3123@gmail.com</a></p>
+                        <p className="py-6 max-w-lg text-cyan-100 font-light mb-6">
+                            Only Goody Guddy members can join the repository. If you are a member of Goody Guddy, please login. Otherwise, contact with <a className="font-bold text-blue-300" href="mailto:asifzaman3123@gmail.com">asifzaman3123@gmail.com</a>
+                        </p>
                     </div>
                     <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-transparent bg-slate-800 backdrop backdrop-blur-sm bg-opacity-30">
-                        <form className="card-body">
+                        <form className="card-body" onSubmit={loginLogic}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text font-light text-white">Email</span>
@@ -84,7 +83,7 @@ const Login = () => {
                             </div>
                             {error && <div className="text-red-600">{error}</div>}
                             <div className="form-control mt-6">
-                                <button type="button" onClick={loginLogic} className="btn btn-success">Login</button>
+                                <button type="submit" className="btn btn-success">Login</button>
                             </div>
                         </form>
                     </div>

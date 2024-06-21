@@ -15,7 +15,6 @@ const useFirestore = () => {
 
         return () => unsubscribe(); // Unsubscribe from snapshot listener when component unmounts
     }, []);
-
     return { photos, loading };
 };
 
